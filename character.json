@@ -1,0 +1,368 @@
+[
+    {
+        "name": "戦士",
+        "hp": 120,
+        "mp": 30,
+        "atk": 25,
+        "def": 15,
+        "skills": [
+            {
+                "name": "Power Slash",
+                "cost_mp": 10,
+                "hp_to_enemy": -30,
+                "hp_to_self": 0,
+                "mp_to_self": 0,
+                "mp_to_enemy": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 10,
+                "def_to_enemy": 0,
+                "def_to_self": 0,
+                "description": "強力な一撃を与え、自分の攻撃力を上げる"
+            },
+            {
+                "name": "Second Wind",
+                "cost_mp": 5,
+                "hp_to_enemy": 0,
+                "hp_to_self": 20,
+                "mp_to_enemy": 0,
+                "mp_to_self": 10,
+                "atk_to_enemy": 0,
+                "atk_to_self": 0,
+                "def_to_enemy": 0,
+                "def_to_self": 0,
+                "description": "体力と魔力を同時に回復する"
+            },
+            {
+                "name": "Berserk",
+                "cost_mp": 10,
+                "hp_to_enemy": -25,
+                "hp_to_self": -10,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 20,
+                "def_to_enemy": 0,
+                "def_to_self": -10,
+                "description": "自身を犠牲にして大幅な攻撃力を得る（防御力低下）"
+            },
+            {
+                "name": "Fortress Strike",
+                "cost_mp": 0,
+                "hp_to_enemy": -20,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 0,
+                "def_to_enemy": 0,
+                "def_to_self": 10,
+                "description": "攻撃と同時に防御力を高める堅実な一撃"
+            },
+            {
+                "name": "War Cry",
+                "cost_mp": 12,
+                "hp_to_enemy": -15,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 15,
+                "def_to_enemy": 0,
+                "def_to_self": -5,
+                "description": "咆哮で士気を上げ、攻撃しつつ自分の攻撃力鵜をアップ(防御力わずかに低下)"
+            }
+        ]
+    },
+    {
+        "name": "魔法使い",
+        "hp": 80,
+        "mp": 80,
+        "atk": 10,
+        "def": 10,
+        "skills": [
+            {
+                "name": "Fireball",
+                "cost_mp": 15,
+                "hp_to_enemy": -40,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 0,
+                "def_to_enemy": 0,
+                "def_to_self": 0,
+                "description": "炎の玉で敵に大ダメージを与える"
+            },
+            {
+                "name": "Mana Drain",
+                "cost_mp": 10,
+                "hp_to_enemy": 0,
+                "hp_to_self": 0,
+                "mp_to_enemy": -20,
+                "mp_to_self": 20,
+                "atk_to_enemy": 0,
+                "atk_to_self": 8,
+                "def_to_enemy": 0,
+                "def_to_self": 8,
+                "description": "敵のMPを吸収し、自身のMPを回復する"
+            },
+            {
+                "name": "Mana Drain",
+                "cost_mp": 10,
+                "hp_to_enemy": 0,
+                "hp_to_self": 0,
+                "mp_to_enemy": -20,
+                "mp_to_self": 20,
+                "atk_to_enemy": 0,
+                "atk_to_self": 0,
+                "def_to_enemy": 0,
+                "def_to_self": 0,
+                "description": "敵のMPを吸収し、自身のMPを回復する"
+            },
+            {
+                "name": "Blizzard",
+                "cost_mp": 20,
+                "hp_to_enemy": -50,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 0,
+                "def_to_enemy": -5,
+                "def_to_self": 0,
+                "description": "氷の嵐で攻撃し、敵の防御をわずかに下げる"
+            },
+            {
+                "name": "Arcane Surge",
+                "cost_mp": 25,
+                "hp_to_enemy": -30,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 20,
+                "atk_to_enemy": 0,
+                "atk_to_self": 15,
+                "def_to_enemy": 0,
+                "def_to_self": 0,
+                "description": "力を解放し、攻撃しながら自分のATKとMPを回復"
+            },
+            {
+                "name": "Ice Barrier",
+                "cost_mp": 10,
+                "hp_to_enemy": 0,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 0,
+                "def_to_enemy": 0,
+                "def_to_self": 15,
+                "description": "氷の壁で身を守り、防御力を大きく上げる"
+            }
+        ]
+    },
+    {
+        "name": "聖騎士",
+        "hp": 140,
+        "mp": 50,
+        "atk": 20,
+        "def": 25,
+        "skills": [
+            {
+                "name": "Holy Smite",
+                "cost_mp": 10,
+                "hp_to_enemy": -35,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 5,
+                "def_to_enemy": 0,
+                "def_to_self": 0,
+                "description": "聖なる一撃で敵を攻撃し、自身の攻力を少し上げる"
+            },
+            {
+                "name": "Divine Shield",
+                "cost_mp": 15,
+                "hp_to_enemy": 0,
+                "hp_to_self": 40,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 0,
+                "def_to_enemy": 0,
+                "def_to_self": 20,
+                "description": "光の盾で自らを守り、大幅に回復しつつ防御力を強化"
+            },
+            {
+                "name": "Retribution",
+                "cost_mp": 20,
+                "hp_to_enemy": -30,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": -10,
+                "atk_to_self": 0,
+                "def_to_enemy": -10,
+                "def_to_self": 0,
+                "description": "裁きの光で敵を弱体化しつつダメージを与える"
+            }
+        ]
+    },
+    {
+        "name": "暗殺者",
+        "hp": 90,
+        "mp": 60,
+        "atk": 18,
+        "def": 10,
+        "skills": [
+            {
+                "name": "Shadow Strike",
+                "cost_mp": 10,
+                "hp_to_enemy": -30,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 15,
+                "def_to_enemy": 0,
+                "def_to_self": 0,
+                "description": "間に紛れて急所を突き、攻撃しながらATKを大幅アップ"
+            },
+            {
+                "name": "Smoke Bomb",
+                "cost_mp": 8,
+                "hp_to_enemy": 0,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": -15,
+                "atk_to_self": 0,
+                "def_to_enemy": 0,
+                "def_to_self": 10,
+                "description": "煙等で身を隠し、防を上げつつ敵の攻撃力を下げる"
+            },
+            {
+                "name": "Poison Blade",
+                "cost_mp": 12,
+                "hp_to_enemy": -25,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 0,
+                "def_to_enemy": -5,
+                "def_to_self": 0,
+                "description": "毒刃で攻撃し、追加で敵の防御を削る"
+            }
+        ]
+    },
+    {
+        "name": "岩ゴーレム",
+        "hp": 200,
+        "mp": 40,
+        "atk": 25,
+        "def": 40,
+        "skills": [
+            {
+                "name": "Rock Armor",
+                "cost_mp": 10,
+                "hp_to_enemy": 0,
+                "hp_to_self": 30,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 0,
+                "def_to_enemy": 0,
+                "def_to_self": 20,
+                "description": "岩の鎧で身を固め、HPを回復しながらDEF 大幅アップ"
+            },
+            {
+                "name": "Seismic Slam",
+                "cost_mp": 15,
+                "hp_to_enemy": -40,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 0,
+                "def_to_enemy": 0,
+                "def_to_self": 10,
+                "description": "地攻撃で敵にダメージを与えつつ自身のDEFを上げる"
+            },
+            {
+                "name": "Dust Cloud",
+                "cost_mp": 10,
+                "hp_to_enemy": 0,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": -15,
+                "atk_to_self": 0,
+                "def_to_enemy": -5,
+                "def_to_self": 0,
+                "description": "土煙を上げて敵をかく乱し、ATKとDEF を下げる"
+            }
+        ]
+    },
+    {
+        "name": "吸血鬼の王",
+        "hp": 150,
+        "mp": 120,
+        "atk": 30,
+        "def": 20,
+        "skills": [
+            {
+                "name": "Blood Drain",
+                "cost_mp": 15,
+                "hp_to_enemy": -35,
+                "hp_to_self": 35,
+                "mp_to_enemy": 0,
+                "mp_to_self": 10,
+                "atk_to_enemy": 0,
+                "atk_to_self": 0,
+                "def_to_enemy": 0,
+                "def_to_self": 0,
+                "description": "敵の血を吸い取り、HPを吸収してMPも回復する"
+            },
+            {
+                "name": "Night Shroud",
+                "cost_mp": 20,
+                "hp_to_enemy": 0,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 0,
+                "atk_to_enemy": 0,
+                "atk_to_self": 0,
+                "def_to_enemy": -10,
+                "def_to_self": 15,
+                "description": "闇の帳で身を覆い、防力を上げながら敵のDEFを下げる"
+            },
+            {
+                "name": "Dark Gift",
+                "cost_mp": 25,
+                "hp_to_enemy": 0,
+                "hp_to_self": 0,
+                "mp_to_enemy": 0,
+                "mp_to_self": 20,
+                "atk_to_enemy": 0,
+                "atk_to_self": 20,
+                "def_to_enemy": 0,
+                "def_to_self": 0,
+                "description": "闇の力で自身を強化し、ATKとMPを同時に大幅上昇"
+            },
+            {
+                "name": "Pale Curse",
+                "cost_mp": 10,
+                "hp_to_enemy": -15,
+                "hp_to_self": 0,
+                "mp_to_enemy": -10,
+                "mp_to_self": 0,
+                "atk_to_enemy": -10,
+                "atk_to_self": 0,
+                "def_to_enemy": 0,
+                "def_to_self": 0,
+                "description": "呪詛で敵のHP・MP・ATKを同時に削る"
+            }
+        ]
+    }
+]

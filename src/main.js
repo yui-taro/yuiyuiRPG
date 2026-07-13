@@ -1,0 +1,1 @@
+console.log("mainが読み込まれた");
