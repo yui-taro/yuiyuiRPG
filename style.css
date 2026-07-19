@@ -87,3 +87,227 @@ button {
   cursor: pointer;
 }
 
+/* タイトル画面 */
+body.title-screen {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+
+  background-image: url("./images/title-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body.title-screen .game {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* タイトル画面では戦闘部分を中央配置する */
+body.title-screen .battle-area {
+  display: none;
+}
+
+body.title-screen .status-area {
+  display: none;
+}
+
+body.title-screen #game-info {
+  display: none;
+}
+
+body.title-screen .message-area {
+  border: none;
+  background: transparent;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.title-content {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.game-title {
+  margin: 0;
+
+  font-size: clamp(52px, 9vw, 120px);
+  font-family: serif;
+  letter-spacing: 8px;
+
+  color: white;
+  text-shadow:
+    0 4px 0 #273b80,
+    0 8px 15px rgba(0, 0, 0, 0.8);
+}
+
+.game-subtitle {
+  margin-top: 12px;
+
+  font-size: clamp(16px, 2vw, 26px);
+  letter-spacing: 6px;
+
+  color: white;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+body.title-screen .button-area {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.start-button {
+  width: min(320px, 70vw);
+  padding: 18px 40px;
+
+  border: 3px solid white;
+  border-radius: 6px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(80, 80, 80, 0.95),
+    rgba(10, 10, 10, 0.95)
+  );
+
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 4px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 12px rgba(0, 0, 0, 0.7),
+    inset 0 0 10px rgba(255, 255, 255, 0.25);
+
+  transition:
+    transform 0.15s,
+    filter 0.15s;
+}
+
+.start-button:hover {
+  transform: scale(1.05);
+  filter: brightness(1.25);
+}
+
+.start-button:active {
+  transform: scale(0.98);
+}
+
+body.battle-screen {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+
+  background-image: url("./images/fight-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body.battle-screen .game {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+  overflow: hidden;
+}
+
+body.battle-screen .status-area {
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  right: 3%;
+  z-index: 10;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+body.battle-screen .status-card {
+  width: 300px;
+  padding: 14px 20px;
+
+  border: 2px solid #c99a4b;
+  border-radius: 8px;
+
+  background: rgba(12, 8, 24, 0.82);
+  color: white;
+}
+
+body.battle-screen .battle-area {
+  position: absolute;
+  top: 15%;
+  left: 0;
+
+  width: 100%;
+  height: 48%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  padding: 0 10%;
+  box-sizing: border-box;
+}
+
+body.battle-screen #player-image,
+body.battle-screen #enemy-image {
+  display: block;
+
+  width: min(28vw, 380px);
+  height: min(38vh, 430px);
+
+  object-fit: contain;
+  filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.75));
+}
+
+body.battle-screen .message-area {
+  position: absolute;
+  left: 4%;
+  bottom: 5%;
+
+  width: 58%;
+  height: 23%;
+
+  padding: 24px;
+  box-sizing: border-box;
+
+  border: none;
+  background: transparent;
+
+  color: white;
+  font-size: 24px;
+}
+
+body.battle-screen .button-area {
+  position: absolute;
+  right: 4%;
+  bottom: 5%;
+
+  width: 30%;
+  height: 23%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  overflow-y: auto;
+}
