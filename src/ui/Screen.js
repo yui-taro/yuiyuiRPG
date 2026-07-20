@@ -93,10 +93,9 @@ export class Screen {
     document.body.classList.remove(
   "reward-screen",
   "player-select-screen",
+  "title-screen",
 );
-    document.body.classList.remove(
-  "player-select-screen",
-);
+    
     document.body.classList.remove("title-screen");
     document.body.classList.add("battle-screen");
 

@@ -10,22 +10,17 @@ export class InputController {
     //引数が必要のためこの書き方
     this.buttonArea.addEventListener("click", (event) => {
         //targetは、イベントに発生したhtml要素を取得
-      const clickedElement = event.target;
+     const clickedButton = event.target.closest("button");
 
-      if (!(clickedElement instanceof HTMLButtonElement)) {
-        return;
-      }
+if (!clickedButton) {
+  return;
+}
 
-      //datasetはactionの内容を保存
-      const action = clickedElement.dataset.action;
-
-      //onButtonClick=イベントの処理によくつける名前
-      //
-      onButtonClick({
-        action: clickedElement.dataset.action,
-        characterIndex: clickedElement.dataset.characterIndex,
-        skillIndex: clickedElement.dataset.skillIndex,
-      });
+onButtonClick({
+  action: clickedButton.dataset.action,
+  characterIndex: clickedButton.dataset.characterIndex,
+  skillIndex: clickedButton.dataset.skillIndex,
+});
     });
   }
 }

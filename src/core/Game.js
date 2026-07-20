@@ -53,6 +53,7 @@ export class Game {
 
     if (action === "use-skill") {
       this.handleSkill(skillIndex);
+      return;
     }
 
     if (action === "reward-level-up") {
@@ -248,6 +249,20 @@ handleGameOver(playerMessage, enemyMessage) {
     this.enemy,
     `${playerMessage}\n\n${enemyMessage}\n\nあなたの敗北……`,
   );
+}
+
+renderGameOver(player, enemy, message) {
+  this.renderBattle(player, enemy, message);
+
+  this.buttonArea.innerHTML = `
+    <button
+      type="button"
+      class="game-action-button"
+      data-action="restart-game"
+    >
+      タイトルへ戻る
+    </button>
+  `;
 }
 
 handleLevelUpReward() {
