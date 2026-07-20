@@ -68,13 +68,12 @@ export class fileChange {
 
 const getImagePath = (characterName) => {
   const imageMap = {
-   "戦士": "images/yusya.png",
-  "魔法使い": "images/mahou.png",
-    "聖騎士": "images/se.png",
-    "暗殺者": "images/ansatu.png",
-    "岩ゴーレム": "images/iwa.png",
-    "吸血鬼の王": "images/kyuu.png",
-    "スライム": "images/suraimu.png",
+   "戦士": "images/warrior.png",
+  "魔法使い": "images/mage.png",
+    "聖騎士": "images/paladin.png",
+    "暗殺者": "images/assassin.png",
+    "岩ゴーレム": "images/rock-golem.png",
+    "吸血鬼の王": "images/vampire-rode.png",
   };
 
   //nullまたはundefinedだったら、空文字を返す

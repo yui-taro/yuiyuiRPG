@@ -322,8 +322,8 @@ body.battle-screen .battle-area {
 body.battle-screen #player-image,
 body.battle-screen #enemy-image {
   display: block;
-  width: min(24vw, 330px);
-  height: min(34vh, 370px);
+  width: min(31vw, 460px);
+height: min(48vh, 520px);
 
   object-fit: contain;
   object-position: center bottom;
@@ -331,6 +331,11 @@ body.battle-screen #enemy-image {
   filter: drop-shadow(
     0 10px 8px rgba(0, 0, 0, 0.75)
   );
+}
+
+body.battle-screen .battle-area {
+  padding: 0 16%;
+  top: 30%;
 }
 
 body.battle-screen .message-area {
