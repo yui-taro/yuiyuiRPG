@@ -10,7 +10,7 @@ export class fileChange {
   static async loadCharacters() {
     //fetch()は、ファイルからデータを読み込む機能
     //responseは、既存機能。okやstatesなどが入る
-    const response = await fetch("../character.json");
+    const response = await fetch("./character.json");
 
     //読み込み不可ならエラー
     if (!response.ok) {
@@ -68,13 +68,13 @@ export class fileChange {
 
 const getImagePath = (characterName) => {
   const imageMap = {
-   // "戦士": "images/yusya.png",
-    //"魔法使い": "images/mahou.png",
+   "戦士": "images/yusya.png",
+  "魔法使い": "images/mahou.png",
     "聖騎士": "images/se.png",
-    //"暗殺者": "images/ansatu.png",
+    "暗殺者": "images/ansatu.png",
     "岩ゴーレム": "images/iwa.png",
-    //"吸血鬼の王": "images/kyuu.png",
-    //"スライム": "images/suraimu.png",
+    "吸血鬼の王": "images/kyuu.png",
+    "スライム": "images/suraimu.png",
   };
 
   //nullまたはundefinedだったら、空文字を返す
