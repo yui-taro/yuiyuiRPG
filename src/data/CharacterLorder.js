@@ -3,10 +3,10 @@
 import { Character } from "../models/Character.js";
 import { Skill } from "../models/Skill.js";
 
-export class fileChange {
-    //loadCharactersはキャラクターを読み込むメソッド
-    //async=時間のかかる処理,セットでawait=読み込みが終わるまで次の処理しない
-    //staticにしとくとほかのクラスでnewしなくても使える
+export class CharacterLorder {
+  //loadCharactersはキャラクターを読み込むメソッド
+  //async=時間のかかる処理,セットでawait=読み込みが終わるまで次の処理しない
+  //staticにしとくとほかのクラスでnewしなくても使える
   static async loadCharacters() {
     //fetch()は、ファイルからデータを読み込む機能
     //responseは、既存機能。okやstatesなどが入る
@@ -50,12 +50,11 @@ export class fileChange {
       //Characterクラスから新しいキャラクターを作る
       const character = new Character({
         name: characterData.name,
-        level: 1,
         hp: characterData.hp,
         mp: characterData.mp,
         atk: characterData.atk,
         def: characterData.def,
-        skills: skills,
+        skills,
         image: getImagePath(characterData.name),
       });
 
@@ -68,15 +67,15 @@ export class fileChange {
 
 const getImagePath = (characterName) => {
   const imageMap = {
-   "戦士": "images/warrior.png",
-  "魔法使い": "images/mage.png",
-    "聖騎士": "images/paladin.png",
-    "暗殺者": "images/assassin.png",
-    "岩ゴーレム": "images/rock-golem.png",
-    "吸血鬼の王": "images/vampire-rode.png",
+    戦士: "images/warrior.png",
+    魔法使い: "images/mage.png",
+    聖騎士: "images/paladin.png",
+    暗殺者: "images/assassin.png",
+    岩ゴーレム: "images/rock-golem.png",
+    吸血鬼の王: "images/vampire-rode.png",
   };
 
   //nullまたはundefinedだったら、空文字を返す
   //オブジェクトの値を呼び出す場合は[]を使用
   return imageMap[characterName] ?? "";
-}
+};
