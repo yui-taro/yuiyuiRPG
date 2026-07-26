@@ -9,17 +9,33 @@ export class Screen {
     this.buttonArea = document.getElementById("button-area");
   }
 
+  //すべての画面を一旦削除し、必要な画面のみ引数で指定し表示
+  setScreenClass(screenClass) {
+    document.body.classList.remove(
+      "title-screen",
+      "player-select-screen",
+      "battle-screen",
+      "reward-screen",
+    );
+
+    document.body.classList.add(screenClass);
+  }
+
+  createStatusHtml(character) {
+    return `
+    <h2>${character.name}</h2>
+    <p>Lv.${character.level}</p>
+    <p>HP：${character.hp} / ${character.maxHp}</p>
+    <p>MP：${character.mp} / ${character.maxMp}</p>
+    <p>ATK：${character.atk}</p>
+    <p>DEF：${character.def}</p>
+  `;
+  }
+
   renderTitle() {
-    document.body.classList.add("title-screen");
-    document.body.classList.remove("battle-screen");
+    this.setScreenClass("title-screen");
 
     this.gameInfo.textContent = "";
-
-    this.playerStatus.style.display = "none";
-    this.enemyStatus.style.display = "none";
-
-    this.playerImage.style.display = "none";
-    this.enemyImage.style.display = "none";
 
     this.messageArea.innerHTML = `
       <div class="title-content">
@@ -39,37 +55,25 @@ export class Screen {
     `;
   }
 
-  leaveTitle() {
-    document.body.classList.remove("title-screen");
-  }
-
   renderPlayerSelect(characters) {
-  document.body.classList.remove("title-screen");
-  document.body.classList.remove("battle-screen");
-  document.body.classList.add("player-select-screen");
+    this.setScreenClass("player-select-screen");
 
-  this.gameInfo.style.display = "none";
-  this.playerStatus.style.display = "none";
-  this.enemyStatus.style.display = "none";
-  this.playerImage.style.display = "none";
-  this.enemyImage.style.display = "none";
-
-  this.messageArea.innerHTML = `
+    this.messageArea.innerHTML = `
     <div class="select-heading">
       <p class="select-subtitle">CHOOSE YOUR HERO</p>
       <h2>冒険するキャラクターを選んでください</h2>
     </div>
   `;
 
-  this.buttonArea.innerHTML = characters
-    .map(
-      (character, index) => `
+    this.buttonArea.innerHTML = characters
+      .map(
+        (character, index) => `
         <button
-          type="button"
-          class="character-select-card"
-          data-action="select-player"
-          data-character-index="${index}"
-        >
+  type="button"
+  class="menu-card character-select-card"
+  data-action="select-player"
+  data-character-index="${index}"
+>
           <span class="character-name">
             ${character.name}
           </span>
@@ -85,46 +89,18 @@ export class Screen {
           </span>
         </button>
       `,
-    )
-    .join("");
-}
+      )
+      .join("");
+  }
 
-  renderBattle(player, enemy, message) {
-    document.body.classList.remove(
-  "reward-screen",
-  "player-select-screen",
-  "title-screen",
-);
-    
-    document.body.classList.remove("title-screen");
-    document.body.classList.add("battle-screen");
+  renderBattle(player, enemy, message, winStreak) {
+    this.setScreenClass("battle-screen");
 
-    this.gameInfo.style.display = "";
-    this.gameInfo.textContent = "戦闘";
+    this.gameInfo.textContent = `連勝数：${winStreak}`;
 
-    this.playerStatus.style.display = "";
-    this.enemyStatus.style.display = "";
+    this.playerStatus.innerHTML = this.createStatusHtml(player);
 
-    this.playerImage.style.display = "";
-    this.enemyImage.style.display = "";
-
-    this.playerStatus.innerHTML = `
-      <h2>${player.name}</h2>
-      <p>Lv.${player.level}</p>
-      <p>HP：${player.hp} / ${player.maxHp}</p>
-      <p>MP：${player.mp} / ${player.maxMp}</p>
-      <p>ATK：${player.atk}</p>
-      <p>DEF：${player.def}</p>
-    `;
-
-    this.enemyStatus.innerHTML = `
-      <h2>${enemy.name}</h2>
-      <p>Lv.${enemy.level}</p>
-      <p>HP：${enemy.hp} / ${enemy.maxHp}</p>
-      <p>MP：${enemy.mp} / ${enemy.maxMp}</p>
-      <p>ATK：${enemy.atk}</p>
-      <p>DEF：${enemy.def}</p>
-    `;
+    this.enemyStatus.innerHTML = this.createStatusHtml(enemy);
 
     this.playerImage.src = player.image;
     this.playerImage.alt = player.name;
@@ -148,7 +124,7 @@ export class Screen {
           (skill, index) => `
             <button
               type="button"
-              class="game-action-button"
+              class=" menu-card game-action-button"
               data-action="use-skill"
               data-skill-index="${index}"
             >
@@ -160,28 +136,10 @@ export class Screen {
     `;
   }
 
-  leaveBattle() {
-    document.body.classList.remove("battle-screen");
-  }
+  renderReward(enemy, winStreak) {
+    this.setScreenClass("reward-screen");
 
-  renderReward(player, enemy, winStreak) {
-  document.body.classList.remove(
-    "title-screen",
-    "battle-screen",
-    "player-select-screen",
-  );
-
-  document.body.classList.add("reward-screen");
-
-  this.gameInfo.style.display = "none";
-
-  this.playerStatus.style.display = "none";
-  this.enemyStatus.style.display = "none";
-
-  this.playerImage.style.display = "none";
-  this.enemyImage.style.display = "none";
-
-  this.messageArea.innerHTML = `
+    this.messageArea.innerHTML = `
     <div class="reward-heading">
       <p class="reward-subtitle">
         VICTORY REWARD
@@ -196,10 +154,10 @@ export class Screen {
     </div>
   `;
 
-  this.buttonArea.innerHTML = `
+    this.buttonArea.innerHTML = `
     <button
       type="button"
-      class="reward-card"
+      class="menu-card reward-card"
       data-action="reward-level-up"
     >
       <span class="reward-name">
@@ -212,7 +170,7 @@ export class Screen {
 
     <button
       type="button"
-      class="reward-card"
+      class="menu-card reward-card"
       data-action="reward-steal-skill"
     >
       <span class="reward-name">
@@ -225,7 +183,7 @@ export class Screen {
 
     <button
       type="button"
-      class="reward-card"
+      class="menu-card reward-card"
       data-action="reward-heal-hp"
     >
       <span class="reward-name">
@@ -238,7 +196,7 @@ export class Screen {
 
     <button
       type="button"
-      class="reward-card"
+      class="menu-card  reward-card"
       data-action="reward-heal-mp"
     >
       <span class="reward-name">
@@ -249,20 +207,19 @@ export class Screen {
       </span>
     </button>
   `;
-}
+  }
 
-renderSkillReward(enemy) {
-  this.gameInfo.textContent = "スキル選択";
-
-  this.messageArea.innerHTML = `
+  renderSkillReward(enemy) {
+    this.messageArea.innerHTML = `
     <h2>習得するスキルを選んでください</h2>
   `;
 
-  this.buttonArea.innerHTML = enemy.skills
-    .map(
-      (skill, index) => `
+    this.buttonArea.innerHTML = enemy.skills
+      .map(
+        (skill, index) => `
         <button
           type="button"
+          class="menu-card"
           data-action="select-reward-skill"
           data-skill-index="${index}"
         >
@@ -271,7 +228,20 @@ renderSkillReward(enemy) {
           消費MP：${skill.costMp}
         </button>
       `,
-    )
-    .join("");
-}
+      )
+      .join("");
+  }
+  renderGameOver(player, enemy, message, winStreak) {
+    this.renderBattle(player, enemy, message, winStreak);
+
+    this.buttonArea.innerHTML = `
+    <button
+      type="button"
+      class="menu-card game-action-button"
+      data-action="restart-game"
+    >
+      タイトルへ戻る
+    </button>
+  `;
+  }
 }
