@@ -1,58 +1,57 @@
 <!-- RPG画面の土台 -->
 <!DOCTYPE html>
 <html lang="ja">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>yuiRPG</title>
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <main class  = "game">
-    <h1 class="site-logo">yuiRPG</h1>
+  </head>
+  <body>
+    <main class="game">
+      <h1 class="site-logo">yuiRPG</h1>
 
-    <!-- game-infoで連勝数やフェーズを書き換える -->
-     <!-- idは後で置き換えたいものに使用する -->
-    <div id = "game-info">
+      <!-- game-infoで連勝数やフェーズを書き換える -->
+      <!-- idは後で置き換えたいものに使用する -->
+      <div id="game-info">
         連勝数:0
-    </div>
+      </div>
 
-    <!-- ステータスを扱うセクション -->
-<section class = "status-area">
-    <div id = "player-status" class = "status-card">
-        プレイヤーステータス
-    </div>
+      <!-- ステータスを扱うセクション -->
+      <section class="status-area">
+        <div id="player-status" class="status-card">
+          プレイヤーステータス
+        </div>
 
-    <div id = "enemy-status" class = "status-card">
-        敵ステータス
-    </div>
+        <div id="enemy-status" class="status-card">
+          敵ステータス
+        </div>
+      </section>
 
-</section>
+      <!-- バトル画面 -->
+      <section class="battle-area">
+        <div class="character-area">
+          <p>プレイヤー</p>
+          <img id="player-image" alt="プレイヤー画像">
+        </div>
 
-<!-- バトル画面 -->
-<section class = "battle-area">
-    <div class = "character-area">
-        <p>プレイヤー</p>
-        <img id="player-image" alt="プレイヤー画像">
-    </div>
-<div class = "character-area">
-    <p>敵</p>
-    <img id="enemy-image" alt="敵画像">
-</div>
-</section>
+        <div class="character-area">
+          <p>敵</p>
+          <img id="enemy-image" alt="敵画像">
+        </div>
+      </section>
 
-<!-- 敵が現れた！勇者の通常攻撃！などの文字 -->
-<section id = "message-area" class = "message-area">
-    ここにメッセージを表示
-</section>
+      <!-- 敵が現れた！勇者の通常攻撃！などの文字 -->
+      <section id="message-area" class="message-area">
+        ここにメッセージを表示
+      </section>
 
-<section id = "button-area" class = "button-area">
-    ボタンがここに表示される
-
-</section>
-
+      <section id="button-area" class="button-area">
+        ボタンがここに表示される
+      </section>
     </main>
+
     <!-- moduleはjsを分けるときに必要。インポートエクスポートが必要 -->
-    <script type = "module" src="./src/main.js"></script>
-</body>
+    <script type="module" src="./src/main.js"></script>
+  </body>
 </html>

@@ -1,13 +1,13 @@
-//ダメージ計算、スキル使用可否、敵の攻撃、戦闘結果
+// ダメージ計算、スキル使用可否、敵の攻撃、戦闘結果
 
 export class BattleSystem {
   normalAttack(attacker, defender) {
-    //maxは値の中で一番大きい値を返す。これで最低が1になる
+    // maxは値の中で一番大きい値を返す。これで最低が1になる
     const damage = Math.max(1, attacker.atk - defender.def);
-    //characterクラスのメソッド
+    // characterクラスのメソッド
     defender.takeDamage(damage);
 
-    //結果をgameに返す
+    // 結果をgameに返す
     return {
       damage,
       message:
@@ -16,7 +16,7 @@ export class BattleSystem {
   }
 
   useSkill(user, target, skill) {
-    //null,undefinedの時
+    // null,undefinedの時
     if (!skill) {
       return {
         success: false,
@@ -32,7 +32,7 @@ export class BattleSystem {
 
     user.useMp(skill.costMp);
 
-    //スキル使用メッセージを配列に追加していく
+    // スキル使用メッセージを配列に追加していく
     const messages = [`${user.name}は${skill.name}を使用した！`];
 
     this.applyTargetEffects(target, skill, messages);
@@ -40,18 +40,17 @@ export class BattleSystem {
 
     return {
       success: true,
-      //joinは要素を、指定した文字(改行など)でつないで文字列にする
+      // joinは要素を、指定した文字(改行など)でつないで文字列にする
       message: messages.join("\n"),
     };
   }
 
-  //
   createEnemyAction(enemy) {
     const usableSkills = enemy.skills.filter(
       (skill) => skill.costMp <= enemy.mp,
     );
 
-    //通常攻撃分増やす
+    // 通常攻撃分増やす
     const actionCount = usableSkills.length + 1;
 
     const randomIndex = Math.floor(Math.random() * actionCount);

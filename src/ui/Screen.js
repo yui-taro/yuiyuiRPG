@@ -9,7 +9,7 @@ export class Screen {
     this.buttonArea = document.getElementById("button-area");
   }
 
-  //すべての画面を一旦削除し、必要な画面のみ引数で指定し表示
+  // すべての画面を一旦削除し、必要な画面のみ引数で指定し表示
   setScreenClass(screenClass) {
     document.body.classList.remove(
       "title-screen",
@@ -23,13 +23,13 @@ export class Screen {
 
   createStatusHtml(character) {
     return `
-    <h2>${character.name}</h2>
-    <p>Lv.${character.level}</p>
-    <p>HP：${character.hp} / ${character.maxHp}</p>
-    <p>MP：${character.mp} / ${character.maxMp}</p>
-    <p>ATK：${character.atk}</p>
-    <p>DEF：${character.def}</p>
-  `;
+      <h2>${character.name}</h2>
+      <p>Lv.${character.level}</p>
+      <p>HP：${character.hp} / ${character.maxHp}</p>
+      <p>MP：${character.mp} / ${character.maxMp}</p>
+      <p>ATK：${character.atk}</p>
+      <p>DEF：${character.def}</p>
+    `;
   }
 
   renderTitle() {
@@ -59,36 +59,36 @@ export class Screen {
     this.setScreenClass("player-select-screen");
 
     this.messageArea.innerHTML = `
-    <div class="select-heading">
-      <p class="select-subtitle">CHOOSE YOUR HERO</p>
-      <h2>冒険するキャラクターを選んでください</h2>
-    </div>
-  `;
+      <div class="select-heading">
+        <p class="select-subtitle">CHOOSE YOUR HERO</p>
+        <h2>冒険するキャラクターを選んでください</h2>
+      </div>
+    `;
 
     this.buttonArea.innerHTML = characters
       .map(
         (character, index) => `
-        <button
-  type="button"
-  class="menu-card character-select-card"
-  data-action="select-player"
-  data-character-index="${index}"
->
-          <span class="character-name">
-            ${character.name}
-          </span>
+          <button
+            type="button"
+            class="menu-card character-select-card"
+            data-action="select-player"
+            data-character-index="${index}"
+          >
+            <span class="character-name">
+              ${character.name}
+            </span>
 
-          <span class="character-stats">
-            HP ${character.maxHp}
-            ／ MP ${character.maxMp}
-          </span>
+            <span class="character-stats">
+              HP ${character.maxHp}
+              ／ MP ${character.maxMp}
+            </span>
 
-          <span class="character-stats">
-            ATK ${character.atk}
-            ／ DEF ${character.def}
-          </span>
-        </button>
-      `,
+            <span class="character-stats">
+              ATK ${character.atk}
+              ／ DEF ${character.def}
+            </span>
+          </button>
+        `,
       )
       .join("");
   }
@@ -124,7 +124,7 @@ export class Screen {
           (skill, index) => `
             <button
               type="button"
-              class=" menu-card game-action-button"
+              class="menu-card game-action-button"
               data-action="use-skill"
               data-skill-index="${index}"
             >
@@ -140,108 +140,109 @@ export class Screen {
     this.setScreenClass("reward-screen");
 
     this.messageArea.innerHTML = `
-    <div class="reward-heading">
-      <p class="reward-subtitle">
-        VICTORY REWARD
-      </p>
+      <div class="reward-heading">
+        <p class="reward-subtitle">
+          VICTORY REWARD
+        </p>
 
-      <h2>戦利品を選んでください</h2>
+        <h2>戦利品を選んでください</h2>
 
-      <p class="reward-description">
-        ${enemy.name}を撃破しました
-        ／ ${winStreak}連勝
-      </p>
-    </div>
-  `;
+        <p class="reward-description">
+          ${enemy.name}を撃破しました
+          ／ ${winStreak}連勝
+        </p>
+      </div>
+    `;
 
     this.buttonArea.innerHTML = `
-    <button
-      type="button"
-      class="menu-card reward-card"
-      data-action="reward-level-up"
-    >
-      <span class="reward-name">
-        レベルアップ
-      </span>
-      <span class="reward-detail">
-        最大HP・MP・ATK・DEFを強化
-      </span>
-    </button>
+      <button
+        type="button"
+        class="menu-card reward-card"
+        data-action="reward-level-up"
+      >
+        <span class="reward-name">
+          レベルアップ
+        </span>
+        <span class="reward-detail">
+          最大HP・MP・ATK・DEFを強化
+        </span>
+      </button>
 
-    <button
-      type="button"
-      class="menu-card reward-card"
-      data-action="reward-steal-skill"
-    >
-      <span class="reward-name">
-        敵のスキルを奪う
-      </span>
-      <span class="reward-detail">
-        倒した敵のスキルを1つ習得
-      </span>
-    </button>
+      <button
+        type="button"
+        class="menu-card reward-card"
+        data-action="reward-steal-skill"
+      >
+        <span class="reward-name">
+          敵のスキルを奪う
+        </span>
+        <span class="reward-detail">
+          倒した敵のスキルを1つ習得
+        </span>
+      </button>
 
-    <button
-      type="button"
-      class="menu-card reward-card"
-      data-action="reward-heal-hp"
-    >
-      <span class="reward-name">
-        HPを50％回復
-      </span>
-      <span class="reward-detail">
-        最大HPの半分を回復
-      </span>
-    </button>
+      <button
+        type="button"
+        class="menu-card reward-card"
+        data-action="reward-heal-hp"
+      >
+        <span class="reward-name">
+          HPを50％回復
+        </span>
+        <span class="reward-detail">
+          最大HPの半分を回復
+        </span>
+      </button>
 
-    <button
-      type="button"
-      class="menu-card  reward-card"
-      data-action="reward-heal-mp"
-    >
-      <span class="reward-name">
-        MPを50％回復
-      </span>
-      <span class="reward-detail">
-        最大MPの半分を回復
-      </span>
-    </button>
-  `;
+      <button
+        type="button"
+        class="menu-card reward-card"
+        data-action="reward-heal-mp"
+      >
+        <span class="reward-name">
+          MPを50％回復
+        </span>
+        <span class="reward-detail">
+          最大MPの半分を回復
+        </span>
+      </button>
+    `;
   }
 
   renderSkillReward(enemy) {
     this.messageArea.innerHTML = `
-    <h2>習得するスキルを選んでください</h2>
-  `;
+      <h2>習得するスキルを選んでください</h2>
+    `;
 
     this.buttonArea.innerHTML = enemy.skills
       .map(
         (skill, index) => `
-        <button
-          type="button"
-          class="menu-card"
-          data-action="select-reward-skill"
-          data-skill-index="${index}"
-        >
-          ${skill.name}
-          <br>
-          消費MP：${skill.costMp}
-        </button>
-      `,
+          <button
+            type="button"
+            class="menu-card"
+            data-action="select-reward-skill"
+            data-skill-index="${index}"
+          >
+            ${skill.name}
+            <br>
+            消費MP：${skill.costMp}
+          </button>
+        `,
       )
       .join("");
   }
+
   renderGameOver(player, enemy, message, winStreak) {
     this.renderBattle(player, enemy, message, winStreak);
 
     this.buttonArea.innerHTML = `
-    <button
-      type="button"
-      class="menu-card game-action-button"
-      data-action="restart-game"
-    >
-      タイトルへ戻る
-    </button>
-  `;
+      <button
+        type="button"
+        class="menu-card game-action-button"
+        data-action="restart-game"
+      >
+        タイトルへ戻る
+      </button>
+    `;
   }
 }

@@ -279,6 +279,7 @@ export class Game {
 
     this.startNextBattle(result.message);
   }
+
   startNextBattle(rewardMessage) {
     this.enemy = EnemyFactory.createRandomEnemy(
       this.characters,
