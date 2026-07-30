@@ -653,3 +653,138 @@ body.reward-screen .button-area {
   font-size: 15px;
   line-height: 1.5;
 }
+
+/* スマホ表示 */
+@media (max-width: 768px) {
+  .site-logo {
+    top: 10px;
+    font-size: 22px;
+    letter-spacing: 3px;
+  }
+
+  .game {
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  /* タイトル画面 */
+  .game-title {
+    font-size: 48px;
+    letter-spacing: 4px;
+  }
+
+  .game-subtitle {
+    font-size: 16px;
+    letter-spacing: 3px;
+  }
+
+  .title-content {
+    margin-bottom: 50px;
+  }
+
+  .start-button {
+    width: 80vw;
+    font-size: 20px;
+  }
+
+  /* キャラクター選択 */
+  body.player-select-screen .game {
+    padding: 80px 16px 30px;
+  }
+
+  body.player-select-screen .button-area {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .character-select-card {
+    min-height: 110px;
+  }
+
+  /* 報酬画面 */
+  body.reward-screen .game {
+    padding: 80px 16px 30px;
+  }
+
+  body.reward-screen .button-area {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .reward-card {
+    min-height: 110px;
+  }
+
+  /* 戦闘画面 */
+  body.battle-screen {
+    overflow-y: auto;
+  }
+
+  body.battle-screen .game {
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
+  }
+
+  body.battle-screen .status-area {
+    top: 8%;
+    left: 3%;
+    right: 3%;
+    gap: 8px;
+  }
+
+  body.battle-screen .status-card {
+    flex: 1;
+    width: auto;
+    padding: 8px;
+  }
+
+  body.battle-screen .status-card h2 {
+    font-size: 17px;
+  }
+
+  body.battle-screen .status-card p {
+    margin: 3px 0;
+    font-size: 12px;
+  }
+
+  body.battle-screen .battle-area {
+    top: 28%;
+    height: 30%;
+    padding: 0 5%;
+  }
+
+  body.battle-screen #player-image,
+  body.battle-screen #enemy-image {
+    width: 42vw;
+    height: 28vh;
+  }
+
+  body.battle-screen .message-area {
+    left: 4%;
+    bottom: 24%;
+    width: 92%;
+    height: 16%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  body.battle-screen .button-area {
+    left: 4%;
+    right: auto;
+    bottom: 3%;
+    width: 92%;
+    height: 18%;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .game-action-button {
+    min-height: 44px;
+    padding: 8px;
+    font-size: 14px;
+  }
+}

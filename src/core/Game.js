@@ -77,6 +77,11 @@ export class Game {
       return;
     }
 
+    if (action === "back-to-reward") {
+      this.showReward();
+      return;
+    }
+
     if (action === "restart-game") {
       this.restartGame();
       return;
@@ -159,11 +164,6 @@ export class Game {
       this.player,
       this.enemy,
     );
-
-    if (resultAfterPlayerAction === "enemyDefeated") {
-      this.handleVictory(playerMessage);
-      return;
-    }
 
     if (resultAfterPlayerAction === "enemyDefeated") {
       this.handleVictory();
@@ -258,7 +258,15 @@ export class Game {
       return;
     }
 
-    this.screen.renderSkillReward(this.enemy);
+    this.screen.renderSkillReward(this.enemy, this.player);
+  }
+
+  showReward() {
+    if (this.phase !== GamePhase.REWARD) {
+      return;
+    }
+
+    this.screen.renderReward(this.enemy, this.winStreak);
   }
 
   handleSkillReward(skillIndex) {
@@ -273,7 +281,7 @@ export class Game {
     );
 
     if (!result.success) {
-      this.screen.renderSkillReward(this.enemy);
+      this.screen.renderSkillReward(this.enemy, this.player, result.message);
       return;
     }
 

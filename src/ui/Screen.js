@@ -55,6 +55,32 @@ export class Screen {
     `;
   }
 
+  renderLoadError() {
+    this.setScreenClass("title-screen");
+
+    this.gameInfo.textContent = "";
+
+    this.messageArea.innerHTML = `
+      <div class="title-content">
+        <h1 class="game-title">YUI RPG</h1>
+        <p class="load-error-message">
+          ゲームデータを読み込めませんでした。<br>
+          通信状態やデータの内容を確認して、再読み込みしてください。
+        </p>
+      </div>
+    `;
+
+    this.buttonArea.innerHTML = `
+      <button
+        type="button"
+        class="start-button"
+        data-action="reload-game"
+      >
+        再読み込み
+      </button>
+    `;
+  }
+
   renderPlayerSelect(characters) {
     this.setScreenClass("player-select-screen");
 
@@ -209,27 +235,60 @@ export class Screen {
     `;
   }
 
-  renderSkillReward(enemy) {
+  renderSkillReward(enemy, player, errorMessage = "") {
+    const availableSkills = enemy.skills
+      .map((skill, index) => ({ skill, index }))
+      .filter(({ skill }) => !player.hasSkill(skill.name));
+
     this.messageArea.innerHTML = `
       <h2>習得するスキルを選んでください</h2>
+      ${
+        errorMessage
+          ? `<p class="reward-error">${errorMessage}</p>`
+          : ""
+      }
+      ${
+        availableSkills.length === 0
+          ? `
+            <p class="reward-error">
+              習得できる新しいスキルがありません。
+            </p>
+          `
+          : ""
+      }
     `;
 
-    this.buttonArea.innerHTML = enemy.skills
-      .map(
-        (skill, index) => `
+    this.buttonArea.innerHTML =
+      availableSkills
+        .map(
+          ({ skill, index }) => `
           <button
             type="button"
-            class="menu-card"
+            class="menu-card reward-card"
             data-action="select-reward-skill"
             data-skill-index="${index}"
           >
-            ${skill.name}
-            <br>
-            消費MP：${skill.costMp}
+            <span class="reward-name">
+              ${skill.name}
+            </span>
+            <span class="reward-detail">
+              消費MP：${skill.costMp}
+            </span>
           </button>
         `,
-      )
-      .join("");
+        )
+        .join("") +
+      `
+        <button
+          type="button"
+          class="menu-card reward-card"
+          data-action="back-to-reward"
+        >
+          <span class="reward-name">
+            報酬選択へ戻る
+          </span>
+        </button>
+      `;
   }
 
   renderGameOver(player, enemy, message, winStreak) {

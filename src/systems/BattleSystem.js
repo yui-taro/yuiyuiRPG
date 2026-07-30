@@ -114,15 +114,15 @@ export class BattleSystem {
     }
 
     if (skill.atkToEnemy !== 0) {
-      target.atk += skill.atkToEnemy;
+      const atkChange = target.changeAtk(skill.atkToEnemy);
 
-      messages.push(`${target.name}のATKが` + `${skill.atkToEnemy}変化した！`);
+      messages.push(`${target.name}のATKが${atkChange}変化した！`);
     }
 
     if (skill.defToEnemy !== 0) {
-      target.def += skill.defToEnemy;
+      const defChange = target.changeDef(skill.defToEnemy);
 
-      messages.push(`${target.name}のDEFが` + `${skill.defToEnemy}変化した！`);
+      messages.push(`${target.name}のDEFが${defChange}変化した！`);
     }
   }
 
@@ -155,15 +155,15 @@ export class BattleSystem {
     }
 
     if (skill.atkToSelf !== 0) {
-      user.atk += skill.atkToSelf;
+      const atkChange = user.changeAtk(skill.atkToSelf);
 
-      messages.push(`${user.name}のATKが` + `${skill.atkToSelf}変化した！`);
+      messages.push(`${user.name}のATKが${atkChange}変化した！`);
     }
 
     if (skill.defToSelf !== 0) {
-      user.def += skill.defToSelf;
+      const defChange = user.changeDef(skill.defToSelf);
 
-      messages.push(`${user.name}のDEFが` + `${skill.defToSelf}変化した！`);
+      messages.push(`${user.name}のDEFが${defChange}変化した！`);
     }
   }
 }

@@ -1,14 +1,5 @@
 export class Character {
-  constructor({
-    name,
-    level = 1,
-    hp,
-    mp,
-    atk,
-    def,
-    skills = [],
-    image = "",
-  }) {
+  constructor({ name, level = 1, hp, mp, atk, def, skills = [], image = "" }) {
     this.name = name;
     this.level = level;
 
@@ -25,22 +16,22 @@ export class Character {
     this.image = image;
   }
 
-  // hpが０以上の場合true
+  //hpが０以上の場合true
   isAlive() {
     return this.hp > 0;
   }
 
-  // 攻撃
+  //攻撃
   takeDamage(damage) {
     this.hp -= damage;
 
-    // ゼロ以下になったら０固定
+    //ゼロ以下になったら０固定
     if (this.hp < 0) {
       this.hp = 0;
     }
   }
 
-  // hp回復
+  //hp回復
   healHp(amount) {
     this.hp += amount;
 
@@ -49,7 +40,7 @@ export class Character {
     }
   }
 
-  // mp回復
+  //mp回復
   healMp(amount) {
     this.mp += amount;
 
@@ -58,7 +49,7 @@ export class Character {
     }
   }
 
-  // スキルでmp使用
+  //スキルでmp使用
   useMp(cost) {
     this.mp -= cost;
 
@@ -67,7 +58,25 @@ export class Character {
     }
   }
 
-  // 選択：レベルアップ
+  //ATKを増減し、実際に変化した量を返す
+  changeAtk(amount) {
+    const previousAtk = this.atk;
+
+    this.atk = Math.max(0, this.atk + amount);
+
+    return this.atk - previousAtk;
+  }
+
+  //DEFを増減し、実際に変化した量を返す
+  changeDef(amount) {
+    const previousDef = this.def;
+
+    this.def = Math.max(0, this.def + amount);
+
+    return this.def - previousDef;
+  }
+
+  //選択：レベルアップ
   levelUp() {
     this.level += 1;
 
@@ -80,24 +89,24 @@ export class Character {
     this.mp += 10;
   }
 
-  // 指定のスキルを持ってるかチェック
+  //指定のスキルを持ってるかチェック
   hasSkill(skillName) {
-    // some() は、配列の中に 条件に合うものが1つでもあるか を調べるメソッド
+    //some() は、配列の中に 条件に合うものが1つでもあるか を調べるメソッド
     return this.skills.some((skill) => skill.name === skillName);
   }
 
-  // その名前のスキルがなければスキル追加する
+  //その名前のスキルがなければスキル追加する
   addSkill(skill) {
     if (this.hasSkill(skill.name)) {
       return false;
     }
 
-    // pushは追加するメソッド
+    //pushは追加するメソッド
     this.skills.push(skill);
     return true;
   }
 
-  // 本体の値を変えないようにここで動かす
+  //本体の値を変えないようにここで動かす
   clone() {
     return new Character({
       name: this.name,

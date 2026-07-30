@@ -382,15 +382,123 @@ this.enemyStatus.innerHTML =
 - 画面の表示・非表示は、JavaScriptの`style.display`よりbodyの画面クラスとCSSへ任せる形に整理した。
 - `Game.handleBattleAfterPlayerAction()`に、プレイヤーや敵が自傷スキルで倒れた場合の判定を追加した。
 - `src/data/fileChange.js`から、静的メソッドを持つデータ読込クラスへ名前を変更した。
+- 魔法使いに重複していた`Mana Drain`を1件に整理した。
+- スキル報酬では習得済みスキルを候補から除外し、候補がない場合も報酬選択へ戻れるようにした。
+
+## 読込エラー対応を追加した経緯
+
+`character.json`を読み込めない場合、以前は`src/main.js`のトップレベルで処理が停止し、画面上には初期の仮文字だけが残っていた。
+
+現在は、ゲーム開始前に`Screen`と`InputController`を作り、その後の読込・ゲーム生成・開始を`try...catch`で囲んでいる。
+
+```text
+src/main.js
+  → ScreenとInputControllerを作る
+  → try内でCharacterLorder.loadCharacters()
+  → 読込成功：Gameを作ってgame.start()
+  → 読込失敗：catchへ移動
+  → Consoleへ詳しいエラーを出す
+  → Screen.renderLoadError()で案内と再読み込みボタンを表示
+```
+
+### CharacterLorderで残す確認
+
+初心者が作る小規模RPGであるため、データの全項目を細かく検証する処理は追加しない。現在は、よく起こる次の4点だけを確認する。
+
+1. `fetch("./character.json")`の結果が成功しているか
+2. `response.json()`でJSONへ変換できるか
+3. 読み込んだデータが2件以上の配列か
+4. キャラクター名に対応する画像パスが`getImagePath()`に設定されているか
+
+エラーが起きる代表例は次のとおり。
+
+```text
+character.jsonがない・ファイル名が違う
+  → response.okがfalse
+  → throw new Error(...)
+
+JSONのカンマや引用符が間違っている
+  → response.json()が自動的にエラーを発生
+
+データが配列ではない、またはキャラクターが1人以下
+  → 配列と件数の確認でthrow new Error(...)
+
+character.jsonへ新しいキャラクターを追加したが、
+getImagePath()のimageMapへ追加していない
+  → 画像パスが空になりthrow new Error(...)
+```
+
+これらのエラーは`await CharacterLorder.loadCharacters()`を通して`src/main.js`へ戻り、`catch`が受け取る。
+
+```js
+try {
+  const characters =
+    await CharacterLorder.loadCharacters();
+
+  // Gameを作って開始
+} catch (error) {
+  console.error(
+    "ゲームデータの読み込みに失敗しました。",
+    error,
+  );
+
+  screen.renderLoadError();
+}
+```
+
+`Screen.renderLoadError()`はタイトル画面の見た目を使い、利用者向けに次の内容を表示する。
+
+```text
+ゲームデータを読み込めませんでした。
+通信状態やデータの内容を確認して、再読み込みしてください。
+
+［再読み込み］
+```
+
+再読み込みボタンには`data-action="reload-game"`を付ける。エラー時は`Game`を作成できていないため、`src/main.js`が`InputController`へ専用のコールバックを渡す。
+
+```text
+再読み込みボタン
+  → InputControllerがreload-gameを取得
+  → src/main.jsのコールバック
+  → window.location.reload()
+  → ページを最初から読み込み直す
+```
+
+画像マップにパスがあっても、実際のPNGファイルが存在しない場合まではこの読込確認では検出しない。
+
+## スキル報酬失敗時の流れ
+
+勝利報酬で「敵のスキルを奪う」を選んだとき、`Screen.renderSkillReward(enemy, player, errorMessage)`が敵のスキルから習得済みのものを除外する。
+
+```text
+報酬画面
+  → 「敵のスキルを奪う」
+  → Game.showSkillReward()
+  → Screen.renderSkillReward()
+  → player.hasSkill(skill.name)で習得済みか確認
+  → 未習得スキルだけをボタンとして表示
+```
+
+未習得スキルが1件もない場合は「習得できる新しいスキルがありません。」と表示し、`data-action="back-to-reward"`を持つ「報酬選択へ戻る」ボタンを表示する。
+
+```text
+報酬選択へ戻る
+  → InputController
+  → Game.handleAction()
+  → Game.showReward()
+  → 通常の報酬選択画面を再表示
+```
+
+スキルボタンを押すと、`RewardSystem.applyStealSkill()`が対象スキルの存在と同名スキルの習得状況を確認する。失敗時は`success: false`と`message`を返し、`Game.handleSkillReward()`がそのメッセージを`Screen.renderSkillReward()`へ渡して表示する。成功時はスキルを追加し、次の戦闘へ進む。
 
 ## 現在の要確認・整理候補
 
 - `CharacterLorder`は`Loader`の綴りではないため、ファイル名・クラス名・importを`CharacterLoader`へそろえる。
 - `Game.handleBattleAfterPlayerAction()`のプレイヤー行動後に、`enemyDefeated`の同じ条件が2回ある。古い`this.handleVictory(playerMessage)`側を整理する。
 - 相打ちの場合を勝利・敗北・引き分けのどれにするか決める。現在の`getBattleResult()`はプレイヤー敗北を先に判定する。
-- 魔法使いの`Mana Drain`が同名で2件あるため、重複か別スキルか確認する。
 - `Skill.description`は読み込んでいるが画面で未使用。スキル説明として表示するか、不要ならデータ・モデル・読込処理から削除する。
-- スキル習得失敗時の`result.message`が画面に表示されないため、表示方法を決める。
+- 現在の`BattleSystem`は`Character.changeAtk()`と`Character.changeDef()`を呼んでいるが、`Character`に該当メソッドがない。ATK・DEFを変化させるスキルで`TypeError`になるため、直接`Math.max(0, ...)`で更新するか、`Character`へメソッドを追加して役割をそろえる。
 - `.character-select-card`と`.reward-card`の共通部分を`.menu-card`へまとめる。
 - `style.css`内の重複した`body.battle-screen .battle-area`を1つにまとめる。
 - `BattleSystem.normalAttack()`が返す`damage`は現在呼び出し側で未使用。攻撃エフェクトなどで使わないなら返却値から削除できる。

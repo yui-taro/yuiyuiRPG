@@ -1,4 +1,4 @@
-// this.name = nameとかすると、メンバ変数書かなくてもセットされる
+//this.name = nameとかすると、メンバ変数書かなくてもセットされる
 
 export class Skill {
   constructor({

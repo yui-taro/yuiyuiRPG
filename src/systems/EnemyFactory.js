@@ -7,11 +7,7 @@ export class EnemyFactory {
    * @returns {Character} 生成された敵
    */
 
-  static createRandomEnemy(
-    characters,
-    player,
-    winStreak,
-  ) {
+  static createRandomEnemy(characters, player, winStreak) {
     // filter()は、条件に合う要素だけで新しい配列を作る既存メソッド
     const enemyCandidates = characters.filter(
       (character) => character.name !== player.name,
@@ -27,8 +23,7 @@ export class EnemyFactory {
       Math.random() * enemyCandidates.length,
     );
 
-    const selectedCharacter =
-      enemyCandidates[randomCharacterIndex];
+    const selectedCharacter = enemyCandidates[randomCharacterIndex];
 
     // clone()は元データを変えずに複製する自作メソッド
     const enemy = selectedCharacter.clone();
@@ -45,9 +40,7 @@ export class EnemyFactory {
     const maxLevel = Math.max(1, winStreak);
 
     // 1以上maxLevel以下のランダムな整数を作る
-    return Math.floor(
-      Math.random() * maxLevel,
-    ) + 1;
+    return Math.floor(Math.random() * maxLevel) + 1;
   }
 
   static applyLevelStats(enemy) {

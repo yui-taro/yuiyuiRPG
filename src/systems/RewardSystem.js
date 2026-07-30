@@ -6,9 +6,7 @@ export class RewardSystem {
   }
 
   applyHpRecovery(player) {
-    const recoveryAmount = Math.floor(
-      player.maxHp * 0.5,
-    );
+    const recoveryAmount = Math.floor(player.maxHp * 0.5);
 
     player.healHp(recoveryAmount);
 
@@ -16,9 +14,7 @@ export class RewardSystem {
   }
 
   applyMpRecovery(player) {
-    const recoveryAmount = Math.floor(
-      player.maxMp * 0.5,
-    );
+    const recoveryAmount = Math.floor(player.maxMp * 0.5);
 
     player.healMp(recoveryAmount);
 

@@ -20,6 +20,10 @@ export class CharacterLorder {
     // response.json()-jsonを使えるように変換するメソッド
     const characterDataList = await response.json();
 
+    if (!Array.isArray(characterDataList) || characterDataList.length < 2) {
+      throw new Error("キャラクターデータは2件以上の配列にしてください");
+    }
+
     // 変換したCharacterを入れるための配列をつくる
     const characters = [];
 
@@ -48,6 +52,12 @@ export class CharacterLorder {
       }
 
       // Characterクラスから新しいキャラクターを作る
+      const image = getImagePath(characterData.name);
+
+      if (!image) {
+        throw new Error(`${characterData.name}の画像が設定されていません`);
+      }
+
       const character = new Character({
         name: characterData.name,
         hp: characterData.hp,
@@ -55,7 +65,7 @@ export class CharacterLorder {
         atk: characterData.atk,
         def: characterData.def,
         skills,
-        image: getImagePath(characterData.name),
+        image,
       });
 
       characters.push(character);
