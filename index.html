@@ -1,4 +1,5 @@
 <!-- RPG画面の土台 -->
+ <!-- 後からmain.jsとscreen.jsで書き換える -->
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <!-- game全体の見た目を統一 -->
     <main class="game">
       <h1 class="site-logo">yuiRPG</h1>
 
@@ -50,7 +52,11 @@
       </section>
     </main>
 
-    <!-- moduleはjsを分けるときに必要。インポートエクスポートが必要 -->
+    <!-- moduleはjsを分けるときに必要。インポートエクスポートが使えて、役割を分けれる -->
+     <!-- 通常のJavaScriptではなく、ES Modulesという仕組みを使って読み込む指定 -->
+      <!-- 取得に失敗しないためにjsのscriptは最後に -->
+       <!-- awaitも使えるようになる -->
+        <!-- ★main.jsに移動 -->
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>

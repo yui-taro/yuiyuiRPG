@@ -1,4 +1,5 @@
 export class Screen {
+  //htmlからidとってくる
   constructor() {
     this.gameInfo = document.getElementById("game-info");
     this.playerStatus = document.getElementById("player-status");
