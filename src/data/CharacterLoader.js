@@ -3,7 +3,7 @@
 import { Character } from "../models/Character.js";
 import { Skill } from "../models/Skill.js";
 
-export class CharacterLorder {
+export class CharacterLoader {
   // loadCharactersはキャラクターを読み込むメソッド
   // async=時間のかかる処理,セットでawait=読み込みが終わるまで次の処理しない
   // staticにしとくとほかのクラスでnewしなくても使える
