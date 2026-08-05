@@ -7,6 +7,7 @@ export class CharacterLoader {
   // loadCharactersはキャラクターを読み込むメソッド
   // async=時間のかかる処理,セットでawait=読み込みが終わるまで次の処理しない
   // staticにしとくとほかのクラスでnewしなくても使える
+  //キャラを作り出すメソッドのため、特定のインスタンスはいらないため、newすることが無意味
   static async loadCharacters() {
     // fetch()は、ファイルからデータを読み込む機能
     // responseは、既存機能。okやstatesなどが入る
@@ -47,7 +48,7 @@ export class CharacterLoader {
           description: skillData.description,
         });
 
-        // 完成したskillをskillsに入れる
+        // 配列の末尾に追加。完成したskillをskillsに入れる
         skills.push(skill);
       }
 
@@ -71,10 +72,12 @@ export class CharacterLoader {
       characters.push(character);
     }
 
+    //jsonから返還されたすべての要素が入ってる
     return characters;
   }
 }
 
+//return結果がimageに入る
 const getImagePath = (characterName) => {
   const imageMap = {
     戦士: "images/warrior.png",
@@ -85,7 +88,8 @@ const getImagePath = (characterName) => {
     吸血鬼の王: "images/vampire-rode.png",
   };
 
-  // nullまたはundefinedだったら、空文字を返す
+  // nullまたはundefinedだったら、右の空文字を返す
   // オブジェクトの値を呼び出す場合は[]を使用
+  //オブジェクト[キー]で値を取り出せる
   return imageMap[characterName] ?? "";
 };

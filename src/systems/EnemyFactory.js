@@ -7,8 +7,11 @@ export class EnemyFactory {
    * @returns {Character} 生成された敵
    */
 
+  //作成するメソッドなのでstaticでnewしない設計に
+
   static createRandomEnemy(characters, player, winStreak) {
     // filter()は、条件に合う要素だけで新しい配列を作る既存メソッド
+    //敵候補
     const enemyCandidates = characters.filter(
       (character) => character.name !== player.name,
     );
@@ -17,7 +20,9 @@ export class EnemyFactory {
       throw new Error("敵候補が存在しません");
     }
 
+    //jsでランダムな整数をつくる関数がない
     // Math.random()は0以上1未満のランダムな小数を作る既存機能
+    //掛け算して整数に戻す
     // Math.floor()は小数点以下を切り捨てる既存機能
     const randomCharacterIndex = Math.floor(
       Math.random() * enemyCandidates.length,
@@ -28,6 +33,7 @@ export class EnemyFactory {
     // clone()は元データを変えずに複製する自作メソッド
     const enemy = selectedCharacter.clone();
 
+    //連勝数ごとにれべるらんだむ
     enemy.level = this.createRandomLevel(winStreak);
 
     this.applyLevelStats(enemy);
@@ -43,6 +49,7 @@ export class EnemyFactory {
     return Math.floor(Math.random() * maxLevel) + 1;
   }
 
+  //れべるごとにステータス変える
   static applyLevelStats(enemy) {
     const additionalLevel = enemy.level - 1;
 
