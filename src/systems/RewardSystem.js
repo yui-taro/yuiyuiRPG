@@ -6,6 +6,7 @@ export class RewardSystem {
   }
 
   applyHpRecovery(player) {
+    //小数点切り捨て
     const recoveryAmount = Math.floor(player.maxHp * 0.5);
 
     player.healHp(recoveryAmount);

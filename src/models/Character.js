@@ -1,4 +1,5 @@
 export class Character {
+  //正しいデフォルト値をいれる
   constructor({ name, level = 1, hp, mp, atk, def, skills = [], image = "" }) {
     this.name = name;
     this.level = level;
@@ -16,6 +17,7 @@ export class Character {
     this.image = image;
   }
 
+  //これらのメソッドは外部から操作されないことを目的に内部に入れる
   //hpが０以上の場合true
   isAlive() {
     return this.hp > 0;
